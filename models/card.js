@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
-let Board = new Schema({
+let Card = new Schema({
     id          : ObjectId,
     titel       : String,
-    owner       : String,
-    email       : String,
+    content     : String,
+    boardkey    : String,
 });
 
-module.exports = mongoose.model("Board", Board);
+module.exports = mongoose.model('Card', Card);

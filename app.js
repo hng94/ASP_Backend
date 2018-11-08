@@ -7,15 +7,22 @@ const app = new Koa();
 const router = new Router();
 
 require('./database/db')(app);
+
+//models
 let User = require('./models/login');
+let Card = require('./models/card');
+let CardList = require('./models/listofcards');
+let board = require('./models/board');
 
 // Use the bodyparser middlware
 app.use(BodyParser());
 app.use(logger());
 
 let walter = new User({
+    _id,
     name: 'Walter',
     password: 'Walter123',
+    email: 'Walter@gmx.de'
 });
 
 walter.save();
