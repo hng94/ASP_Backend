@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 let boardSchema = new Schema({
     titel        : String,
     owner        :  String,
-    listOfLists    : Arrays ,
+    listOfLists    : Array ,
 });
 
 module.exports = mongoose.model("Board", boardSchema);

@@ -17,7 +17,8 @@ let Card = require('./models/card');
 let ListOfCards = require('./models/listofcards');
 let Board = require('./models/board');
 
-
+const Bennet = new User({name : "Bennet",email: "bennetsetzer@gmx.de",password: "dadsada", });
+Bennet.save();
 
 
 //creates the 'standard' route '/'
