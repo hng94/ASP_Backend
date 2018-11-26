@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const mongoose = require('mongoose');
-const Router = require( 'koa-router' );
+const IO = require( 'koa-socket-2');
 
 //authentication
 
