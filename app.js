@@ -2,30 +2,24 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 const logger = require('koa-logger');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/ASP',{useNewUrlParser: true});
 
 const app = new Koa();
 const router = new Router();
 
 require('./database/db')(app);
-
+// Use the bodyparser middlware
+app.use(BodyParser());
+app.use(logger());
 //models
-let User = require('./models/login');
+let User = require('./models/user');
 let Card = require('./models/card');
 let CardList = require('./models/listofcards');
 let board = require('./models/board');
 
-// Use the bodyparser middlware
-app.use(BodyParser());
-app.use(logger());
 
-let walter = new User({
-    _id,
-    name: 'Walter',
-    password: 'Walter123',
-    email: 'Walter@gmx.de'
-});
 
-walter.save();
 
 //creates the 'standard' route '/'
 //takes an parameter ctx which is send to client
