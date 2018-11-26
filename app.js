@@ -2,31 +2,53 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 const logger = require('koa-logger');
+const mongoose = require('mongoose');
+const IO = require( 'koa-socket-2');
+
+//authentication
+
 
 const app = new Koa();
+const io = new IO();
 const router = new Router();
-
-require('./database/db')(app);
-let User = require('./models/login');
-
-// Use the bodyparser middlware
-app.use(BodyParser());
-app.use(logger());
-
-let walter = new User({
-    name: 'Walter',
-    password: 'Walter123',
-});
-
-walter.save();
-
-//creates the 'standard' route '/'
-//takes an parameter ctx which is send to client
-router.post("/", async function (ctx) {
-    let name = ctx.request.body.name || 'World';
-    ctx.body = {message: `Hello ${name}!`}
-});
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000);
+//Establish database connection
+require('./database/db')(app);
+// Use the bodyparser middlware
+app.use(BodyParser());
+app.use(logger());
+//models
+let User = require('./models/user');
+let Card = require('./models/card');
+let ListOfCards = require('./models/listofcards');
+let Board = require('./models/board');
+router.get('/', (ctx,next) => {
+    ctx.body = 'Hello World!';
+    console.log("> Route: /");
+})
+
+const Bennet = new User({name : "Bennet",email: "bennetsetzer@gmx.de",password: "dadsada", });
+Bennet.save();
+io.attach( app );
+
+app.io.on( 'connection', sock => {
+    console.log("> A new user connected");
+
+    io.on( 'message', (ctx, data) => {
+
+        try {
+            JSON.parse(data);
+            console.log('JSON: ' + data);
+        } catch(e) {
+            console.log(data + " is not JSON format");
+        }
+
+    })
+})
+
+app.listen(3000, function(){
+    console.log("> App listening on port 3000")
+});
+
