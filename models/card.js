@@ -5,7 +5,8 @@ let Schema = mongoose.Schema;
 let Card = new Schema({
 
     titel       : String,
-    content     : String,
+    description     : String,
+    
     boardkey    : String,
 });
 

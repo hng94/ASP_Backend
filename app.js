@@ -3,7 +3,6 @@ const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ASP',{useNewUrlParser: true});
 
 const app = new Koa();
 const router = new Router();
@@ -15,8 +14,8 @@ app.use(logger());
 //models
 let User = require('./models/user');
 let Card = require('./models/card');
-let CardList = require('./models/listofcards');
-let board = require('./models/board');
+let ListOfCards = require('./models/listofcards');
+let Board = require('./models/board');
 
 
 

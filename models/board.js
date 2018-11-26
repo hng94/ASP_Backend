@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
-let User = new Schema({
-    name        : String,
-    password    : String,
+let boardSchema = new Schema({
+    titel        : String,
+    owner        :  String,
+    listOfLists    : Arrays ,
 });
 
-module.exports = mongoose.model("User", User);
+module.exports = mongoose.model("Board", boardSchema);

@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
-let ListOfCards = new Schema({
+let ListOfCardsSchema = new Schema({
 
-    titel       : String,
+    title       : String,
+    listOfCards : Array,
+    position : Integer,
 });
 
-module.exports = mongoose.model("CardList", ListOfCards);
+module.exports = mongoose.model("ListOfCards", ListOfCardsSchema);
